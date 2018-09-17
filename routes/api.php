@@ -16,3 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('register', 'Auth\RegisterController@register');
+Route::post('login', 'Auth\LoginController@login');
+Route::post('logout', 'Auth\LoginController@logout');
+//Book Resource Route
+Route::resource('books', 'BookController');
+Route::post('books/{id}/rate', 'BookController@rate');
+Route::post('books/{id}/comment', 'BookController@comment');
+
