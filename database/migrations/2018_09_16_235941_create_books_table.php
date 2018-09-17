@@ -17,7 +17,7 @@ class CreateBooksTable extends Migration
             $table->increments('id');
             $table->integer("user_id");
             $table->string("title");
-            $table->string("file_path");
+            $table->string("file_path")->default(null);
             $table->string("description");
             $table->softDeletes();
             $table->timestamps();

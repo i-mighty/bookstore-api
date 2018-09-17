@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('login', function (){
+   response()->json(['status' => 'error', 'message' => 'Please login to access that service']);
+});

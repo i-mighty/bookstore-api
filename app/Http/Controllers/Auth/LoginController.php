@@ -50,7 +50,7 @@ class LoginController extends Controller
             return response()->json(['error' => 'Could not create token.'], 500);
         }
         $user = auth()->user();
-        return response()->json(["user" => $user, "token" => $token],200);
+        return response()->json(["status" => "success", "message"=> "Login successful","user" => $user, "token" => $token],200);
     }
 
     public function getAuthenticatedUser(){

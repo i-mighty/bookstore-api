@@ -26,8 +26,8 @@ class Book extends Model
         return $this->hasMany("App\Models\Comment");
     }
 
-    public function getFilePathAttribute(){
-        return Cloudder::secureShow($this->file_path);//get the entire secure path for the requested resource.
+    public function getFilePathAttribute($value){
+        return Cloudder::secureShow($value);//get the entire secure path for the requested resource.
     }
 
     public function getAverageStars(){

@@ -51,10 +51,12 @@ class BookController extends Controller{
             return response(collect($validator->errors()), 400);
         }
         $book = new Book($request->except('file_path'));
-        $book->file_path = $this->saveFile($request);
         $user = auth()->user();
         $user->books()->save($book);
-        return response(compact('user', 'book'), 201);
+        $book->file_path = $this->saveFile($request);
+        $book->save();
+        return response()->json([
+            'status' => 'success', 'message' => 'Book saved successfully', 'user' => $user, 'book' => $book],201);
     }
 
     /**
@@ -147,7 +149,7 @@ class BookController extends Controller{
 
     public function saveFile(Request $request){
         $file = $request->file('file_path');
-        Cloudder::upload($file->getRealPath(),null);
+        Cloudder::upload($file->getRealPath(),null, array("resource_type" => "auto"));
         return Cloudder::getPublicId();
     }
 
